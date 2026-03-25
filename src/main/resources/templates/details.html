@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!--para usar los templates de thymeleaf hay que poner esto-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title th:text="${title}">Document</title> <!--para usar thymeleaf se pone th: y lo que venga despues-->
 </head>
 <body>
-    <h1>Hola mundo spring boot</h1>
+    <h1 th:text="${title}"></h1>
+    <ul>
+        <li th:text="${name}"></li>
+        <li th:text="${lastname}"></li>
+
+    </ul>
     
 </body>
 </html>
