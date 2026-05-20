@@ -1,5 +1,9 @@
 package com.alejandra.springboot.webapp.springboot_web.controllers;
 
+//import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 //import java.util.HashMap;
 //import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,5 +32,21 @@ public class UserRestController {
 
 
         return userDto; //devolvemos el json
+    }
+
+    @GetMapping("/list")
+    public List<User> list(){
+        User user = new User("alejandra", "agudelo");
+        User user2 = new User("pepe", "doe");
+        User user3 = new User("jon", "DOE");
+
+        List<User> users = Arrays.asList(user, user2, user3);
+        //List<User> users =new ArrayList<>();
+        //users.add(user);
+        //users.add(user2);
+        //users.add(user3);
+
+        return users;
+
     }
 }
