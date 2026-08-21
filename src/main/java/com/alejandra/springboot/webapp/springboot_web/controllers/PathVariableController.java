@@ -7,6 +7,7 @@ import com.alejandra.springboot.webapp.springboot_web.models.User;
 import com.alejandra.springboot.webapp.springboot_web.models.dto.ParamDto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -30,10 +31,18 @@ public class PathVariableController {
     //se puede inyectar directamente en el metodo de la peticion get
 
     @Value("${config.listOfValues}")
-    private String[] listOfValues;
+    private List<String> listOfValues;
 
     @Value("${config.code}")
     private Integer code;
+
+    @Value("#{'${config.listOfValues}'.toUpperCase().split(',')}")
+    private List<String> valueList;
+    // convertimos la lista en un arreglo manualmente
+
+    @Value("#{'${config.listOfValues}'.toUpperCase()}")
+    private String valueString;
+    // convertimos la lista en un string manualmente
 
     @GetMapping("/baz/{message}")
     public ParamDto baz(@PathVariable() String message) {
@@ -67,6 +76,8 @@ public class PathVariableController {
         json.put("username", username);
         json.put("message", message);
         json.put("listOfValues", listOfValues);
+        json.put("valueString", valueString);
+        json.put("valueList", valueList);
         json.put("code", code);
         return json;
     }
