@@ -226,3 +226,36 @@ A partir de ese momento, Spring Boot iniciará la aplicación y levantará el se
 De esta forma, las fases `clean` y `package` pueden ejecutarse desde la interfaz de Visual Studio Code sin necesidad de escribir manualmente los comandos de Maven Wrapper.
 
 El resultado final es el mismo: se genera el archivo `.jar` dentro de `target` y este archivo se ejecuta mediante Java para levantar el servidor de la aplicación Spring Boot.
+
+# Importante: recargar los proyectos Maven después de ejecutar `clean`
+
+Cuando se ejecuta `clean` desde el apartado **Maven** de Visual Studio Code mediante **Run**, puede producirse un error al intentar iniciar posteriormente la aplicación desde **Spring Boot Dashboard**.
+
+El error indica que no se encuentra la clase principal de la aplicación.
+
+Esto ocurre porque al ejecutar `clean` se eliminan los archivos generados anteriormente y Visual Studio Code puede quedarse con el estado anterior del proyecto Maven.
+
+### Solución
+
+Para solucionar este problema hay que volver al apartado **Maven** del explorador de Visual Studio Code.
+
+Junto al apartado **Maven** aparece el botón:
+
+**Reload All Maven Projects**
+
+Este botón permite volver a cargar y actualizar la información de los proyectos Maven.
+
+Hay que pulsar **Reload All Maven Projects** y esperar a que termine de recargar el proyecto.
+
+Una vez recargado, ya se puede volver al **Spring Boot Dashboard** e iniciar la aplicación normalmente.
+
+Por tanto, el proceso recomendado cuando se ejecuta `clean` desde Visual Studio Code es:
+
+1. Ir a **Maven → Lifecycle**.
+2. Ejecutar **clean → Run**.
+3. Volver al apartado **Maven**.
+4. Pulsar **Reload All Maven Projects**.
+5. Ir a **Spring Boot Dashboard**.
+6. Iniciar la aplicación.
+
+Si se intenta iniciar la aplicación desde Spring Boot Dashboard justo después de ejecutar `clean`, sin recargar los proyectos Maven, puede aparecer el error de que no se encuentra la clase principal.
